@@ -1,10 +1,15 @@
-const { Model, DataTypes } = require("sequelize");
+const { Model, DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../database/index");
 
 class Sellers extends Model {}
 
 Sellers.init(
   {
+    id: {
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
+      primaryKey: true,
+    },
     firstname: {
       type: DataTypes.STRING,
       allowNull: false,

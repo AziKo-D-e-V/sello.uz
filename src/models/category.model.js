@@ -1,32 +1,28 @@
 const { Model, DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../database/index");
+const Admins = require("./admin.model");
 
-class Admins extends Model {}
+class Category extends Model {}
 
-Admins.init(
+Category.init(
   {
     id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
     },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    password: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
     sequelize,
-    tableName: "admins",
+    tableName: "categories",
     createdAt: "created_at",
     updatedAt: "updated_at",
     freezeTableName: true,
-    autoIncrement: true,
   }
 );
 
-module.exports = Admins;
+module.exports = Category;

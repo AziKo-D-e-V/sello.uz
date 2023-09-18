@@ -1,6 +1,8 @@
 const create = async (req, res, next) => {
   try {
-    console.log(req.body);
+    const { image, info, name, price, brand } = req.body;
+
+    
   } catch (error) {
     next(error);
   }
