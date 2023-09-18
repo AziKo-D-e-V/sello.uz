@@ -20,18 +20,18 @@ const register = async (req, res, next) => {
     const findAdmin = await Admin.findAll(
       { where: { username: username } },
       { logging: false }
-      );
-      if (findAdmin.length > 0) {
-        throw new CustomError(409, "Admin already exists");
-      }
-      
-      const newAdmin = await Admin.create(
-        {
+    );
+    if (findAdmin.length > 0) {
+      throw new CustomError(409, "Admin already exists");
+    }
+
+    const newAdmin = await Admin.create(
+      {
         username,
         password: generate,
       },
       { logging: false }
-      );
+    );
     const token = jwt.sign({ id: newAdmin.id });
 
     res.cookie("token", token);
@@ -40,7 +40,6 @@ const register = async (req, res, next) => {
       .status(201)
       .json({ message: `Succesfully created admin`, token: token });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
@@ -85,29 +84,33 @@ const categoryCreate = async (req, res, next) => {
     });
     if (validationError) throw new CustomError(400, validationError.message);
 
-    const findCategory = await Category.findAll(
-      { where: { name }, logging: false  }
-    );
+    const findCategory = await Category.findAll({
+      where: { name },
+      logging: false,
+    });
     if (findCategory.length > 0) {
       throw new CustomError(404, "Category not found");
     }
 
-    const newCategory = await Category.create({ name, admin_id: req.user }, { logging: false });
+    const newCategory = await Category.create(
+      { name, admin_id: req.user },
+      { logging: false }
+    );
     res.status(201).json({ message: "succes", newCategory });
   } catch (error) {
     next(error);
   }
 };
 
-const getCategory = async(req, res, next) => {
+const getCategory = async (req, res, next) => {
   try {
-    const category = await Category.findAll()
-    if(category.length < 1) throw new CustomError(404, "Category not found");
+    const category = await Category.findAll();
+    if (category.length < 1) throw new CustomError(404, "Category not found");
 
     res.status(200).json({ message: "SUCCES", category });
   } catch (error) {
     next(error);
   }
-}
+};
 
 module.exports = { register, login, categoryCreate, getCategory };

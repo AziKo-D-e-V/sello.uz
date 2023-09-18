@@ -1,6 +1,7 @@
 const Admins = require("./admin.model");
 const Category = require("./category.model");
 const Products = require("./product.model");
+const Sellers = require("./seller.model");
 
 const relations = () => {
   Admins.hasMany(Category, { foreignKey: "admin_id" });
@@ -8,6 +9,9 @@ const relations = () => {
 
   Category.hasMany(Products, { foreignKey: "category_id" });
   Products.belongsTo(Category, { foreignKey: "category_id" });
+
+  Products.hasMany(Sellers, { foreignKey: "seller_id" });
+  Sellers.belongsTo(Category, { foreignKey: "seller_id" });
 };
 
 module.exports = relations;

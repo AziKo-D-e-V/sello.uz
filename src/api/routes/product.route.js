@@ -4,6 +4,6 @@ const isSeller = require("../middlewares/isSeller.middleware");
 
 const router = new Router();
 
-router.post("/product", isSeller, create);
+router.post("/product/:id", isSeller, create);
 
 module.exports = router;

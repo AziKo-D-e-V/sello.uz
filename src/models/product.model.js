@@ -19,7 +19,7 @@ Products.init(
       allowNull: false,
     },
     image: {
-      type: DataTypes.STRING(32),
+      type: DataTypes.STRING(64),
       allowNull: false,
     },
     price: {
@@ -30,14 +30,6 @@ Products.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    category_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
-    seller_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
   },
   {
     sequelize,
@@ -45,7 +37,6 @@ Products.init(
     createdAt: "created_at",
     updatedAt: "updated_at",
     freezeTableName: true,
-
   }
 );
 
