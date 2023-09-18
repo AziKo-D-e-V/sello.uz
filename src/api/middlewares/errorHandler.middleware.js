@@ -4,7 +4,7 @@ const errorHandler = (err, req, res, next) => {
   if (err instanceof CustomError) {
     return res.status(err.status).json({ error: err.message });
   } else {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: err.message });
   }
 };
 

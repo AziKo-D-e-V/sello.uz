@@ -10,8 +10,8 @@ const relations = () => {
   Category.hasMany(Products, { foreignKey: "category_id" });
   Products.belongsTo(Category, { foreignKey: "category_id" });
 
-  Products.hasMany(Sellers, { foreignKey: "seller_id" });
-  Sellers.belongsTo(Category, { foreignKey: "seller_id" });
+  Products.belongsTo(Sellers, { foreignKey: "seller_id" });
+  Sellers.hasMany(Products, { foreignKey: "seller_id" });
 };
 
 module.exports = relations;

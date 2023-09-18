@@ -9,6 +9,7 @@ const CustomError = require("../../libs/customError");
 const verificationValidation = require("../validations/verify.validation");
 const sellerValidation = require("../validations/seller.validation");
 const login2Validation = require("../validations/seller.login.validation");
+const Sellers = require("../../models/seller.model");
 
 const redis = new Redis({
   port: 6379,
@@ -197,15 +198,46 @@ const verify = async (req, res, next) => {
       },
       { logging: false }
     );
-
     const token = jwt.sign({ id: newUser.id });
     res.cookie("token", token);
 
     res.status(201).json({ message: "Seller created", token });
   } catch (error) {
-    console.error(error);
     next(error);
   }
 };
 
-module.exports = { register, login, verify };
+const getAll = async (req, res, next) => {
+  try {
+    const seller = await Sellers.findAll({
+      attributes: { exclude: ["password"] },
+      logging: false, 
+    });
+    if (seller.length < 1) throw new CustomError(404, "Seller not found");
+
+    res.status(200).json({ message: "SUCCES", seller });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getOne = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    if (!id) throw new CustomError(404, "Invalid id");
+
+    const seller = await Seller.findByPk(id, {
+      attributes: { exclude: ["password"] },
+      logging: false,
+    });
+    console.log(seller);
+    if (!seller) throw new CustomError(404, "Seller not found");
+
+
+    res.status(200).json({ message: "Success", seller });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, verify, getAll, getOne };

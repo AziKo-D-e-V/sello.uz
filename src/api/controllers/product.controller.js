@@ -4,6 +4,7 @@ const Category = require("../../models/category.model");
 const { extname } = require("path");
 const productValidation = require("../validations/product.validation");
 const CustomError = require("../../libs/customError");
+const Sellers = require("../../models/seller.model");
 
 const create = async (req, res, next) => {
   try {
@@ -34,7 +35,6 @@ const create = async (req, res, next) => {
     });
     if (findProduct.length > 0)
       throw new CustomError(400, "Product already exists");
-
     const newProduct = await Products.create(
       { name, brand, price, image: imageName, info, category_id, seller_id },
       { logging: false }
@@ -45,4 +45,61 @@ const create = async (req, res, next) => {
   }
 };
 
-module.exports = { create };
+const getAll = async (req, res, next) => {
+  try {
+    const products = await Products.findAll({
+      include: [
+        Category,
+        {
+          model: Sellers,
+          attributes: [
+            "id",
+            "firstname",
+            "lastname",
+            "email",
+            "phone_number",
+            "company_name",
+            "INN",
+            "created_at",
+            "updated_at",
+          ],
+        },
+      ],
+    });
+    res.status(200).json({ message: "Success", products });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+const getOne = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const product = await Products.findByPk(id, {
+      include: [
+        Category,
+        {
+          model: Sellers,
+          attributes: [
+            "id",
+            "firstname",
+            "lastname",
+            "email",
+            "phone_number",
+            "company_name",
+            "INN",
+            "created_at",
+            "updated_at",
+          ],
+        },
+      ],
+      logging: false,
+    });
+    res.status(200).json({ message: "Success", product });
+  } catch (error) {
+    next(error);
+  }
+};
+module.exports = { create, getOne, getAll };

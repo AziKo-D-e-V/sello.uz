@@ -102,9 +102,16 @@ const categoryCreate = async (req, res, next) => {
   }
 };
 
-const getCategory = async (req, res, next) => {
+const getAll = async (req, res, next) => {
   try {
-    const category = await Category.findAll();
+    const category = await Category.findAll({
+      include: [
+        {
+          model: Admin,
+          attributes: ["id", "username", "created_at", "updated_at"],
+        },
+      ],
+    });
     if (category.length < 1) throw new CustomError(404, "Category not found");
 
     res.status(200).json({ message: "SUCCES", category });
@@ -113,4 +120,24 @@ const getCategory = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, categoryCreate, getCategory };
+const getOne = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const category = await Category.findByPk(id, {
+      include: [
+        {
+          model: Admin,
+          attributes: ["id", "username", "created_at", "updated_at"],
+        },
+      ],
+      logging: false,
+    });
+
+    res.status(201).json({ message: "SUCCES", category });
+  } catch (error) {
+    next();
+  }
+};
+
+module.exports = { register, login, categoryCreate, getAll, getOne };
