@@ -68,7 +68,6 @@ const getAll = async (req, res, next) => {
     });
     res.status(200).json({ message: "Success", products });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

@@ -230,7 +230,6 @@ const getOne = async (req, res, next) => {
       attributes: { exclude: ["password"] },
       logging: false,
     });
-    console.log(seller);
     if (!seller) throw new CustomError(404, "Seller not found");
 
 
