@@ -58,4 +58,33 @@ const searchCategory = async (req, res, next) => {
     next(error);
   }
 };
-module.exports = { searchProduct, searchCategory };
+
+const paginationProduct = async (req, res, next) => {
+  try {
+    const { page, limit } = req.query;
+
+    const offset = (page - 1) * limit;
+
+    const attributes = {
+      exclude: ["created_at", "updated_at"],
+    };
+    const { rows, count } = await Products.findAndCountAll({
+      attributes,
+      limit,
+      offset,
+      logging: false,
+    });
+
+    res.status(200).json({
+      message: "Success",
+      rows,
+      count,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { searchProduct, searchCategory, paginationProduct };
