@@ -12,7 +12,6 @@ const isAdmin = async (req, res, next) => {
     req.user = id
     next();
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
