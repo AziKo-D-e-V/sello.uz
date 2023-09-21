@@ -31,7 +31,7 @@ const register = async (req, res, next) => {
 
     const generate = await generateHash(password);
     const findUser = await Users.findAll({
-      where: { email: email.toLowerCase(), username: username },
+      where: { username: username },
       logging: false,
     });
 

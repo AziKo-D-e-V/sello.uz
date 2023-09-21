@@ -1,12 +1,12 @@
 const config = require("config");
 const port = config.get("port");
-const sequlize = require("../database/index");
+const sequelize = require("../database/index");
 
 const bootstrapt = async (app) => {
-  await sequlize.authenticate({
+  await sequelize.authenticate({
     logging: false,
   });
-  await sequlize.sync({ alter: true, logging: false });
+  await sequelize.sync({ alter: true, logging: false });
   app.listen(port, () => {
     console.log(
       `- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -`
@@ -16,6 +16,7 @@ const bootstrapt = async (app) => {
       `- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -`
     );
   });
+  require('./swagger')(app);
 };
 
 module.exports = bootstrapt;

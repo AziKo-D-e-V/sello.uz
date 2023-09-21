@@ -1,5 +1,4 @@
 const Admins = require("./admin.model");
-const Backet = require("./backet.model");
 const Category = require("./category.model");
 const Products = require("./product.model");
 const Sellers = require("./seller.model");
@@ -15,17 +14,8 @@ const relations = () => {
   Products.belongsTo(Sellers, { foreignKey: "seller_id" });
   Sellers.hasMany(Products, { foreignKey: "seller_id" });
 
-  Backet.belongsTo(Products, { foreignKey: "product_id" });
-  Products.hasMany(Backet, { foreignKey: "product_id" });
-
-  Backet.belongsTo(Users, { foreignKey: "user_id" });
-  Users.hasMany(Backet, { foreignKey: "user_id" });
-
   Users.belongsToMany(Products, { through: "user_to_product" });
   Products.belongsToMany(Users, { through: "user_to_product" });
-
-  Users.belongsToMany(Products, { through: "backets" });
-  Products.belongsToMany(Users, { through: "backets" });
 };
 
 module.exports = relations;

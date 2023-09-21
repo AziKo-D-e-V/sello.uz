@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const relations = require("../models/relations");
 
 const modules = async (app) => {
+  
   app.use(cors());
   app.use(express.json());
   app.use(cookieParser());

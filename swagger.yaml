@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: User API
+  version: 1.0.0
+  description: API for user registration, login, and verification
+servers:
+  - url: http://localhost:4000
+paths:
+  /auth:
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: OK
+  /auth/{id}:
+    get:
+      summary: Get a user by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: User ID
+      responses:
+        '200':
+          description: OK
+  /auth/signup:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                fullname:
+                  type: string
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: Created
+  /auth/signin:
+    post:
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: OK
+  /auth/signup/verify:
+    post:
+      summary: Verify user registration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                verification:
+                  type: string
+      responses:
+        '201':
+          description: OK

@@ -9,7 +9,6 @@ const CustomError = require("../../libs/customError");
 const verificationValidation = require("../validations/verify.validation");
 const sellerValidation = require("../validations/seller.validation");
 const login2Validation = require("../validations/seller.login.validation");
-const Sellers = require("../../models/seller.model");
 
 const redis = new Redis({
   port: 6379,
@@ -43,11 +42,10 @@ const register = async (req, res, next) => {
     const generate = await generateHash(password);
 
     const findUser = await Seller.findAll({
-      where: { email: email.toLowerCase(), phone_number: phone_number },
+      where: { INN },
       logging: false,
     });
 
-    console.log(findUser);
     if (findUser.length > 0) {
       return res.status(409).json({ message: "Student already exists" });
     }
@@ -210,9 +208,9 @@ const verify = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const seller = await Sellers.findAll({
+    const seller = await Seller.findAll({
       attributes: { exclude: ["password"] },
-      logging: false, 
+      logging: false,
     });
     if (seller.length < 1) throw new CustomError(404, "Seller not found");
 
@@ -232,7 +230,6 @@ const getOne = async (req, res, next) => {
       logging: false,
     });
     if (!seller) throw new CustomError(404, "Seller not found");
-
 
     res.status(200).json({ message: "Success", seller });
   } catch (error) {
