@@ -1,9 +1,10 @@
 const { Model, DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../database/index");
+const Admins = require("./admin.model");
 
-class UserProduct extends Model {}
+class Backet extends Model {}
 
-UserProduct.init(
+Backet.init(
   {
     id: {
       type: Sequelize.UUID,
@@ -11,21 +12,21 @@ UserProduct.init(
       primaryKey: true,
     },
     user_id: {
-      type: DataTypes.STRING,
+      type: Sequelize.UUID,
       allowNull: false,
     },
     product_id: {
-      type: DataTypes.STRING(),
+      type: Sequelize.UUID,
       allowNull: false,
     },
   },
   {
     sequelize,
-    tableName: "userproducts",
+    tableName: "backets",
     createdAt: "created_at",
     updatedAt: "updated_at",
     freezeTableName: true,
   }
 );
 
-module.exports = UserProduct;
+module.exports = Backet;

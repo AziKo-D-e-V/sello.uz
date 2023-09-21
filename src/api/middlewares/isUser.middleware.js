@@ -9,10 +9,9 @@ const isUser = async (req, res, next) => {
 
     const { id } = verify(token);
     const findUser = await Users.findByPk(id, { logging: false });
-    
+
     if (findUser == null) throw new CustomError(403, "Permission denied");
     req.user = id;
-    
     next();
   } catch (error) {
     next(error);

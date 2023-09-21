@@ -43,7 +43,7 @@ const register = async (req, res, next) => {
     const generate = await generateHash(password);
 
     const findUser = await Seller.findAll({
-      where: { email: email, phone_number: phone_number },
+      where: { email: email.toLowerCase(), phone_number: phone_number },
       logging: false,
     });
 
@@ -141,6 +141,7 @@ const login = async (req, res, next) => {
     res.cookie("token", token);
     res.status(201).json({ message: `Welcome`, token: token });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
@@ -193,7 +194,7 @@ const verify = async (req, res, next) => {
         phone_number: JSON.parse(phone_number),
         company_name: JSON.parse(company_name),
         INN: JSON.parse(INN),
-        email: JSON.parse(email),
+        email: JSON.parse(email).toLowerCase(),
         password: JSON.parse(generate),
       },
       { logging: false }

@@ -31,7 +31,7 @@ const register = async (req, res, next) => {
 
     const generate = await generateHash(password);
     const findUser = await Users.findAll({
-      where: { email: email, username: username },
+      where: { email: email.toLowerCase(), username: username },
       logging: false,
     });
 
@@ -45,7 +45,7 @@ const register = async (req, res, next) => {
         const verifyCode = Math.floor(Math.random() * 9000) + 1000;
         console.log(verifyCode);
 
-        const time = 60;
+        const time = 90;
 
         await redis.set("codes", JSON.stringify(verifyCode), "EX", time);
         await redis.set("fullname", JSON.stringify(fullname), "EX", time);
@@ -150,12 +150,15 @@ const verify = async (req, res, next) => {
       promisify(redis.get).bind(redis)("fullname"),
       promisify(redis.get).bind(redis)("username"),
     ]);
-    const newUser = await Users.create({
-      fullname: JSON.parse(fullname),
-      username: JSON.parse(username),
-      email: JSON.parse(email),
-      password: JSON.parse(generate),
-    });
+    const newUser = await Users.create(
+      {
+        fullname: JSON.parse(fullname),
+        username: JSON.parse(username).toLowerCase(),
+        email: JSON.parse(email).toLowerCase(),
+        password: JSON.parse(generate),
+      },
+      { logging: false }
+    );
 
     const token = jwt.sign({ id: newUser.id });
     res.cookie("token", token);
