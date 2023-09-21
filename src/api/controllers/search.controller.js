@@ -38,10 +38,9 @@ const searchProduct = async (req, res, next) => {
 
 const searchCategory = async (req, res, next) => {
   try {
-    const { name } = req.params;
+    const { name } = req.query;
 
     let conditions = {};
-
     if (name) {
       conditions.name = { [Op.iLike]: `%${name}%` };
     }
@@ -50,7 +49,6 @@ const searchCategory = async (req, res, next) => {
       where: conditions,
       logging: false,
     });
-
     if (data.length == 0) throw new CustomError(404, "Category not found");
 
     return res.status(200).json({ message: "Success", data });

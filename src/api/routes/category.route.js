@@ -53,6 +53,8 @@ router.get("/search/category", searchCategory);
  * @swagger
  * /category:
  *   get:
+ *      security:
+ *       cookieAuth: []
  *     summary: Get all categories
  *     tags: [category]
  *     responses:

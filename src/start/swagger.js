@@ -6,6 +6,18 @@ const port = config.get("port");
 const swaggerOptions = {
   swaggerDefinition: {
     openapi: "3.0.0",
+    authAction: {
+      JWT: {
+        name: "JWT",
+        schema: {
+          type: "apiKey",
+          in: "header",
+          name: "Authorization",
+          description: "",
+        },
+        value: "Cookie <JWT>",
+      },
+    },
     info: {
       title: "Sello.uz",
       version: "1.0.0",
@@ -17,7 +29,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ['./src/api/routes/*.js'],
+  apis: ["./src/api/routes/*.js"],
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
