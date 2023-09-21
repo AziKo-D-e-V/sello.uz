@@ -5,7 +5,7 @@ const router = Router();
 /**
  * @swagger
  * tags:
- *   name: Admin
+ *   name: admin
  *   description: The admin managing API
  */
 /**
