@@ -14,8 +14,8 @@ const router = new Router();
 /**
  * @swagger
  * tags:
- *   name: category
- *   description: The category managing API
+ *   name: Category
+ *   description: The Category managing API
  */
 
 /**
@@ -23,7 +23,7 @@ const router = new Router();
  * /search/category:
  *   get:
  *     summary: Search categories by name
- *     tags: [search]
+ *     tags: [Search]
  *     parameters:
  *       - in: query
  *         name: name
@@ -53,10 +53,10 @@ router.get("/search/category", searchCategory);
  * @swagger
  * /category:
  *   get:
- *      security:
- *       cookieAuth: []
+ *     security:
+ *      cookieAuth: []
  *     summary: Get all categories
- *     tags: [category]
+ *     tags: [Category]
  *     responses:
  *       200:
  *         description: Successfully retrieved categories
@@ -82,7 +82,7 @@ router.get("/category", getAll);
  * /category/{id}:
  *   get:
  *     summary: Get a category by ID
- *     tags: [category]
+ *     tags: [Category]
  *     parameters:
  *       - in: path
  *         name: id
@@ -115,9 +115,9 @@ router.get("/category/:id", getOne);
  * /admin/category:
  *   post:
  *     summary: Create a new category (admin)
- *     tags: [category]
+ *     tags: [Category]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -151,9 +151,9 @@ router.post("/admin/category", isAdmin, categoryCreate);
  * /admin/category/{id}:
  *   put:
  *     summary: Update a category by ID (admin)
- *     tags: [category]
+ *     tags: [Category]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -196,9 +196,9 @@ router.put("/admin/category/:id", isAdmin, updateCategory);
  * /admin/category/{id}:
  *   delete:
  *     summary: Delete a category by ID (admin)
- *     tags: [category]
+ *     tags: [Category]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: id

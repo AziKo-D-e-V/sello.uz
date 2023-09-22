@@ -139,7 +139,6 @@ const login = async (req, res, next) => {
     res.cookie("token", token);
     res.status(201).json({ message: `Welcome`, token: token });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

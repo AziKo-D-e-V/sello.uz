@@ -5,15 +5,15 @@ const router = Router();
 /**
  * @swagger
  * tags:
- *   name: admin
- *   description: The admin managing API
+ *   name: Admin
+ *   description: The Admin managing API
  */
 /**
  * @swagger
  * /admin/signup:
  *   post:
  *     summary: Register a new admin
- *     tags: [admin]
+ *     tags: [Admin]
  *     requestBody:
  *       required: true
  *       content:
@@ -49,7 +49,7 @@ router.post("/admin/signup", register);
  * /admin/signin:
  *   post:
  *     summary: Admin login
- *     tags: [admin]
+ *     tags: [Admin]
  *     requestBody:
  *       required: true
  *       content:

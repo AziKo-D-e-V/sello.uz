@@ -51,7 +51,7 @@ const login = async (req, res, next) => {
     if (validationError) throw new CustomError(400, validationError.message);
     const findAdmin = await Admin.findAll({
       where: { username: username },
-      loggingIn: false,
+      logging: false,
     });
 
     if (!findAdmin.length) {

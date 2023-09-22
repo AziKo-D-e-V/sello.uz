@@ -7,17 +7,17 @@ const router = new Router();
 /**
  * @swagger
  * tags:
- *   name: likes
- *   description: The like managing API
+ *   name: Likes
+ *   description: The Like managing API
  */
 /**
  * @swagger
  * /likes:
  *   get:
  *     summary: Get a user's liked products
- *     tags: [likes]
+ *     tags: [Likes]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     responses:
  *       200:
  *         description: List of liked products
@@ -48,9 +48,9 @@ router.get("/likes", isUser, getAll);
  * /likes/{product_id}:
  *   post:
  *     summary: Like a product (user)
- *     tags: [likes]
+ *     tags: [Likes]
  *     security:
- *       - bearerAuth: []
+ *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: product_id
