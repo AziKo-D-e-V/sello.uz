@@ -13,10 +13,10 @@ const swaggerOptions = {
     },
     components: {
       securitySchemas: {
-        bearerAuth: {
-          type: "http",
-          schema: "bearer",
-          bearerFormat: "JWT",
+        cookieAuth: {
+          type: "api-key",
+          in: "cookie",
+          name: "Token",
         },
       },
     },
