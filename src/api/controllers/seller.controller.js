@@ -94,7 +94,7 @@ const register = async (req, res, next) => {
           html: `<b>Login code:${verifyCode}</b><br> Do not give this code to anyone<br/>`,
         };
 
-        // await transporter.sendMail(mailData);
+         await transporter.sendMail(mailData);
         res.status(200).json({
           message:
             "Successfully verifacation password sent. Please show your email code and You will send me...",
