@@ -10,17 +10,27 @@ const swaggerOptions = {
       title: "Sello.uz",
       version: "1.0.0",
       description: `Sello.uz || Sello Marketplace  
-      👨‍💻 Created by Azizjon Erkinov`,
+      👨‍💻 Created by Azizjon Erkinov
+      
+      ❗Token must be saved on cookie`,
     },
     components: {
-      securitySchemas: {
-        cookieAuth: {
-          type: "api-key",
-          in: "cookie",
-          name: "Token",
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          in: 'header',
+          name: 'Authorization',
+          description: 'Bearer token to access these api endpoints',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
         },
       },
     },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
     servers: [
       {
         url: `http://localhost:${port}`,
