@@ -9,7 +9,8 @@ const swaggerOptions = {
     info: {
       title: "Sello.uz",
       version: "1.0.0",
-      description: "Swagger documentation for Sello.uz",
+      description: `Sello.uz || Sello Marketplace  
+      👨‍💻 Created by Azizjon Erkinov`,
     },
     components: {
       securitySchemas: {
