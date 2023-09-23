@@ -12,7 +12,7 @@ const swaggerOptions = {
       description: `Sello.uz || Sello Marketplace  
       👨‍💻 Created by Azizjon Erkinov
       
-      ❗Token must be saved on cookie`,
+      ❗You need to save the token to a cookie.`,
     },
     components: {
       securitySchemes: {
