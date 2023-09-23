@@ -10,9 +10,7 @@ const swaggerOptions = {
       title: "Sello.uz",
       version: "1.0.0",
       description: `Sello.uz || Sello Marketplace  
-      👨‍💻 Created by Azizjon Erkinov 
-      `,
-      
+      👨‍💻 Created by Azizjon Erkinov`,
     },
     components: {
       securitySchemas: {

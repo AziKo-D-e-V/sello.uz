@@ -198,4 +198,46 @@ router.get("/seller", getAll);
  */
 router.get("/seller/:id", getOne);
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Seller:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The unique identifier for a seller.
+ *         firstname:
+ *           type: string
+ *           description: The first name of the seller.
+ *         lastname:
+ *           type: string
+ *           description: The last name of the seller.
+ *         email:
+ *           type: string
+ *           description: The email address of the seller.
+ *         phone_number:
+ *           type: string
+ *           description: The phone number of the seller.
+ *         balance:
+ *           type: number
+ *           description: The balance of the seller's account.
+ *         company_name:
+ *           type: string
+ *           description: The name of the seller's company.
+ *         INN:
+ *           type: string
+ *           description: The INN (Individual Taxpayer Identification Number) of the seller.
+ *       example:
+ *         id: xyz789
+ *         firstname: Jane
+ *         lastname: Doe
+ *         email: jane.doe@example.com
+ *         phone_number: +1234567890
+ *         balance: 500.0
+ *         company_name: ABC Company
+ *         INN: 1234567890
+ */
+
 module.exports = router;

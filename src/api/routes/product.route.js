@@ -296,4 +296,38 @@ router.put("/product/:id/:pro_id", isSeller, updatedProduct);
  */
 router.delete("/product/:id", isSeller, deleteProduct);
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Product:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The unique identifier for a product.
+ *         name:
+ *           type: string
+ *           description: The name of the product.
+ *         info:
+ *           type: string
+ *           description: Additional information about the product.
+ *         image:
+ *           type: string
+ *           description: The image URL of the product.
+ *         price:
+ *           type: integer
+ *           description: The price of the product.
+ *         brand:
+ *           type: string
+ *           description: The brand of the product.
+ *       example:
+ *         id: abc123
+ *         name: Product Name
+ *         info: Product description
+ *         image: https://example.com/product.jpg
+ *         price: 50
+ *         brand: Brand Name
+ */
+
 module.exports = router;

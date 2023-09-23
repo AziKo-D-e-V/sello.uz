@@ -80,4 +80,26 @@ router.post("/admin/signup", register);
  */
 router.post("/admin/signin", login);
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Admin:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The unique identifier for an admin.
+ *         username:
+ *           type: string
+ *           description: The username of the admin.
+ *         password:
+ *           type: string
+ *           description: The password of the admin.
+ *       example:
+ *         id: xyz789
+ *         username: adminuser
+ *         password: adminpassword
+ */
+
 module.exports = router;

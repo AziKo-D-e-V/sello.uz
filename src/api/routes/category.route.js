@@ -216,4 +216,22 @@ router.put("/admin/category/:id", isAdmin, updateCategory);
  */
 router.delete("/admin/category/:id", isAdmin, deleteCategory);
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Category:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The unique identifier for a category.
+ *         name:
+ *           type: string
+ *           description: The name of the category.
+ *       example:
+ *         id: abc123
+ *         name: Category Name
+ */
+
 module.exports = router;

@@ -11,16 +11,17 @@ const router = new Router();
  *   description: The Like managing API
  */
 /**
+/**
  * @swagger
- * /likes:
+ * /getAll:
  *   get:
- *     summary: Get a user's liked products
- *     tags: [Likes]
+ *     summary: Get liked products for the authenticated user.
+ *     tags: [User]
  *     security:
  *       - cookieAuth: []
  *     responses:
- *       200:
- *         description: List of liked products
+ *       201:
+ *         description: Successfully retrieved liked products.
  *         content:
  *           application/json:
  *             schema:
@@ -28,39 +29,38 @@ const router = new Router();
  *               properties:
  *                 message:
  *                   type: string
- *                   description: A message indicating the result of the operation.
+ *                   description: A success message.
  *                 likedProducts:
  *                   type: array
- *                   description: List of liked products.
+ *                   description: An array of liked products.
  *                   items:
- *                     type: object
- *                     properties:
- *                       // Define properties of the liked product here
+ *                     $ref: '#/components/schemas/Product' # Change this to match your product schema reference
  *       401:
- *         description: Unauthorized, user access required
- *       404:
- *         description: User not found or no liked products found
+ *         description: Unauthorized. User not authenticated.
+ *       500:
+ *         description: Internal Server Error.
  */
+
 router.get("/likes", isUser, getAll);
 
 /**
  * @swagger
  * /likes/{product_id}:
  *   post:
- *     summary: Like a product (user)
- *     tags: [Likes]
+ *     summary: Add a like to a product.
+ *     tags: [User]
  *     security:
  *       - cookieAuth: []
  *     parameters:
  *       - in: path
  *         name: product_id
  *         required: true
+ *         description: The ID of the product to like.
  *         schema:
  *           type: string
- *         description: ID of the product to like.
  *     responses:
  *       201:
- *         description: Product liked successfully.
+ *         description: Successfully added a like to the product.
  *         content:
  *           application/json:
  *             schema:
@@ -68,14 +68,18 @@ router.get("/likes", isUser, getAll);
  *               properties:
  *                 message:
  *                   type: string
- *                   description: A message indicating the result of the operation.
+ *                   description: A success message.
  *                 createLike:
  *                   type: object
- *                   description: Details of the like created.
+ *                   description: The created like object.
  *       400:
- *         description: Bad request, invalid input or product not found.
+ *         description: Bad Request. Invalid product ID or user not found.
  *       401:
- *         description: Unauthorized, user access required.
+ *         description: Unauthorized. User not authenticated.
+ *       403:
+ *         description: Forbidden. Invalid product ID.
+ *       500:
+ *         description: Internal Server Error.
  */
 
 router.post("/likes/:product_id", isUser, likes);
